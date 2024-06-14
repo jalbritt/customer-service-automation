@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer-support-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: customer-support
+  template:
+    metadata:
+      labels:
+        app: customer-support
+    spec:
+      containers:
+      - name: customer-support
+        image: customer-support:latest
+        ports:
+        - containerPort: 8000
+        envFrom:
+        - configMapRef:
+            name: app-config
