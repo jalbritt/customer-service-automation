@@ -9,8 +9,8 @@ spec:
     namespace: default
   project: default
   source:
-    path: argocd
-    repoURL: https://github.com/jalbritt/customer-service-automation/infrastructure.git
+    path: /infrastructure/argocd
+    repoURL: https://github.com/jalbritt/customer-service-automation.git
     targetRevision: HEAD
   syncPolicy:
     automated:

@@ -7,9 +7,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/jalbritt/customer-service-automation/infrastructure.git'
+    repoURL: 'https://github.com/jalbritt/customer-service-automation.git'
     targetRevision: HEAD
-    path: message-queue
+    path: /infrastructure/message-queue
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: message-queue

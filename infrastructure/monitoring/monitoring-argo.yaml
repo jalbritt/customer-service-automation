@@ -7,9 +7,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/jalbritt/customer-service-automation/infrastructure.git'
+    repoURL: 'https://github.com/jalbritt/customer-service-automation.git'
     targetRevision: HEAD
-    path: monitoring
+    path: /infrastructure/monitoring
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: monitoring
