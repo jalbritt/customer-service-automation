@@ -1,19 +1,20 @@
-# argocd/argocd-parent-app.yaml
+# infrastructure/database/app.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-parent-app
+  name: database
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/jalbritt/customer-service-automation/infrastructure.git'
-    targetRevision: main
-    path: argocd
+    repoURL: 'https://github.com/your-repo/infrastructure.git'
+    targetRevision: HEAD
+    path: database
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: argocd
+    namespace: database
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+
