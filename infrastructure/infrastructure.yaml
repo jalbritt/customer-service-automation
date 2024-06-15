@@ -7,7 +7,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/your-repo/infrastructure.git'
+    repoURL: 'https://github.com/jalbritt/customer-service-automation/infrastructure.git'
     targetRevision: HEAD
     path: .
   destination:
@@ -17,3 +17,17 @@ spec:
     automated:
       prune: true
       selfHeal: true
+  # Define the sub-applications explicitly
+  sources:
+    - repoURL: 'https://github.com/jalbritt/customer-service-automation/infrastructure.git'
+      targetRevision: HEAD
+      path: application/app-argo.yaml
+    - repoURL: 'https://github.com/jalbritt/customer-service-automation/infrastructure.git'
+      targetRevision: HEAD
+      path: database/postgres-argo.yaml
+    - repoURL: 'https://github.com/jalbritt/customer-service-automation/infrastructure.git'
+      targetRevision: HEAD
+      path: message-queue/rabbitmq-argo.yaml
+    - repoURL: 'https://github.com/jalbritt/customer-service-automation/infrastructure.git'
+      targetRevision: HEAD
+      path: monitoring/monitoring-argo.yaml

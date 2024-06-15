@@ -7,7 +7,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/your-repo/infrastructure.git'
+    repoURL: 'https://github.com/jalbritt/customer-service-automation/infrastructure.git'
     targetRevision: HEAD
     path: monitoring
   destination:
