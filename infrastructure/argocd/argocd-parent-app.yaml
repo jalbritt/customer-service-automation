@@ -1,14 +1,15 @@
+# argocd/argocd-parent-app.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: parent-app
+  name: argocd-parent-app
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/jalbritt/customer-service-automation.git'
-    targetRevision: HEAD
-    path: infrastructure
+    repoURL: 'https://github.com/jalbritt/customer-service-automation/infrastructure.git'
+    targetRevision: main
+    path: argocd
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: argocd
@@ -16,4 +17,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
- 

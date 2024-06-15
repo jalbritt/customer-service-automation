@@ -8,7 +8,6 @@ fi
 kubectl apply -f infrastructure/argocd/argocd-ns.yaml
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 kubectl apply -f infrastructure/argocd/argocd-app.yaml
-
 # next, we wait for the service to be ready then return the link to localhost where we can access the ArgoCD UI with a nice message to click on the link
 echo "Waiting for ArgoCD to be ready..."
 kubectl wait --for=condition=available --timeout=1200s deployment/argocd-server -n argocd
