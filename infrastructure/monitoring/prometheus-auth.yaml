@@ -5,38 +5,40 @@ metadata:
   name: prometheus
   namespace: monitoring
 ---
-# prometheus-clusterrole.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: prometheus
+  name: prometheus-clusterrole
 rules:
-- apiGroups: [""]
-  resources:
-  - nodes
-  - nodes/proxy
-  - services
-  - endpoints
-  - pods
-  verbs: ["get", "list", "watch"]
-- apiGroups:
-  - extensions
-  resources:
-  - ingresses
-  verbs: ["get", "list", "watch"]
-- nonResourceURLs: ["/metrics"]
-  verbs: ["get"]
+  - apiGroups: [""]
+    resources:
+      - nodes
+      - nodes/metrics
+      - services
+      - endpoints
+      - pods
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources:
+      - configmaps
+    verbs: ["get"]
+  - apiGroups: ["networking.k8s.io"]
+    resources:
+      - ingresses
+      - ingresses/status
+    verbs: ["get", "list", "watch"]
+  - nonResourceURLs: ["/metrics"]
+    verbs: ["get"]
 ---
-# prometheus-clusterrolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: prometheus
+  name: prometheus-clusterrolebinding
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: prometheus
+  name: prometheus-clusterrole
 subjects:
-- kind: ServiceAccount
-  name: prometheus
-  namespace: prometheus
+  - kind: ServiceAccount
+    name: prometheus
+    namespace: monitoring
