@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: 'https://github.com/jalbritt/customer-service-automation.git'
     targetRevision: HEAD
-    path: /infrastructure/message-queue
+    path: infrastructure/message-queue
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: message-queue

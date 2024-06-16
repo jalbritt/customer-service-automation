@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: 'https://github.com/jalbritt/customer-service-automation.git'
     targetRevision: HEAD
-    path: /infrastructure/monitoring
+    path: infrastructure/monitoring
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: monitoring

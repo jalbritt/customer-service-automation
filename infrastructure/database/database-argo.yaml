@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: 'https://github.com/jalbritt/customer-service-automation.git'
     targetRevision: HEAD
-    path: /infrastructure/database
+    path: infrastructure/database
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: database
