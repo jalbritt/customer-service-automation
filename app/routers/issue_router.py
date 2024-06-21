@@ -1,30 +1,43 @@
-from utils.database import ConnectPostgres
+# routers/issue_router.py
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.orm import Session
+from typing import List
+from utils.database import get_db
 from services.issue_service import IssueService
-from FastAPI import APIRouter
+from schemas.issue import Issue, IssueCreate
+
+router = APIRouter()
 
 
-class IssueRouter():
-    def __init__(self):
-        self.db = ConnectPostgres()
+@router.post("/issues/", response_model=Issue)
+def create_issue(issue: IssueCreate, db: Session = Depends(get_db)):
+    return IssueService.create_issue(db, issue.title, issue.description)
 
-    router = APIRouter()
 
-    @router.post("/issues")
-    def create_issue(self, issue):
-        return IssueService.create_issue(self.db, issue)
+@router.get("/issues/", response_model=List[Issue])
+def read_issues(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    return IssueService.get_issues(db, skip, limit)
 
-    @router.get("/issues")
-    def get_issues(self):
-        return IssueService.get_issues(self.db)
 
-    @router.get("/issues/{issue_id}")
-    def get_issue(self, issue_id):
-        return IssueService.get_issue(self.db, issue_id)
+@router.get("/issues/{issue_id}", response_model=Issue)
+def read_issue(issue_id: int, db: Session = Depends(get_db)):
+    issue = IssueService.get_issue(db, issue_id)
+    if issue is None:
+        raise HTTPException(status_code=404, detail="Issue not found")
+    return issue
 
-    @router.put("/issues/{issue_id}")
-    def update_issue(self, issue_id, issue):
-        return IssueService.update_issue(self.db, issue_id, issue)
 
-    @router.delete("/issues/{issue_id}")
-    def delete_issue(self, issue_id):
-        return IssueService.delete_issue(self.db, issue_id)
+@router.put("/issues/{issue_id}", response_model=Issue)
+def update_issue(issue_id: int, issue: IssueCreate, db: Session = Depends(get_db)):
+    updated_issue = IssueService.update_issue(db, issue_id, issue.title, issue.description, issue.status)
+    if updated_issue is None:
+        raise HTTPException(status_code=404, detail="Issue not found")
+    return updated_issue
+
+
+@router.delete("/issues/{issue_id}", response_model=Issue)
+def delete_issue(issue_id: int, db: Session = Depends(get_db)):
+    deleted_issue = IssueService.delete_issue(db, issue_id)
+    if deleted_issue is None:
+        raise HTTPException(status_code=404, detail="Issue not found")
+    return deleted_issue

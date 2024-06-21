@@ -13,8 +13,8 @@ kubectl apply -f infrastructure/database/database-argo.yaml
 kubectl apply -f infrastructure/message-queue/rabbitmq-argo.yaml
 kubectl apply -f infrastructure/message-queue/rabbitmq-argo.yaml
 kubectl apply -f infrastructure/argocd/argocd-app.yaml
-kubectl apply -f ainfrastructure/argocd/argocd-clusterrole.yaml
-kubectl apply -f ainfrastructure/argocd/argocd-clusterrolebinding.yaml
+kubectl apply -f infrastructure/argocd/argocd-clusterrole.yaml
+kubectl apply -f infrastructure/argocd/argocd-clusterrolebinding.yaml
 
 # next, we wait for the service to be ready then return the link to localhost where we can access the ArgoCD UI with a nice message to click on the link
 echo "Waiting for ArgoCD to be ready..."
