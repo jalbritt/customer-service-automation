@@ -1,7 +1,7 @@
 # main.py
 from fastapi import FastAPI
-from utils.database import engine, Base
-from routers import issue_router
+from app.utils.database import engine, Base
+from app.routers import issue_router
 
 # Create tables
 Base.metadata.create_all(bind=engine)
