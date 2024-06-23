@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: customer-support
-        image: customer-support-application:latest
+        image: customer-support:latest
         ports:
         - containerPort: 8000
         envFrom:
