@@ -15,9 +15,10 @@ spec:
     spec:
       containers:
       - name: customer-support
-        image: customer-support:latest
+        image: customer-support-application:latest
         ports:
         - containerPort: 8000
         envFrom:
         - configMapRef:
             name: app-config
+        imagePullPolicy: Never

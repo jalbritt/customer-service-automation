@@ -22,4 +22,5 @@ kubectl wait --for=condition=available --timeout=1200s deployment/argocd-server 
 argocd admin initial-password -n argocd
 echo "ArgoCD is ready to use. Click on the link below to access the ArgoCD UI and log in using admin and initial password from above"
 minikube service -n argocd argocd-server --url
+# TODO: report back endpoints for grafana, prometheus, and api
 exit
