@@ -36,7 +36,7 @@ spec:
         emptyDir: {}
       - name: grafana-dashboards
         configMap:
-          name: grafana-dashboard
+          name: grafana-dashboards
       - name: grafana-datasources
         configMap:
           name: grafana-datasources
