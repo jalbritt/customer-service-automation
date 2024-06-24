@@ -5,9 +5,20 @@ from typing import List
 from app.utils.database import get_db
 from app.services.issue_service import IssueService
 from app.schemas.issue import Issue, IssueCreate
+from prometheus_client import Counter, Histogram
 
 router = APIRouter()
 
+# Create metrics
+ISSUES_CREATED = Counter('issues_created_total', 'Total number of issues created')
+ISSUE_CREATION_TIME = Histogram('issue_creation_seconds', 'Time spent creating an issue')
+
+@router.post("/issues/", response_model=Issue)
+def create_issue(issue: IssueCreate, db: Session = Depends(get_db)):
+    with ISSUE_CREATION_TIME.time():
+        new_issue = IssueService.create_issue(db, issue.title, issue.description)
+    ISSUES_CREATED.inc()
+    return new_issue
 
 @router.post("/issues/", response_model=Issue)
 def create_issue(issue: IssueCreate, db: Session = Depends(get_db)):
