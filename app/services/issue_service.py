@@ -21,7 +21,9 @@ class IssueService:
         return db.query(Issue).filter(Issue.id == issue_id).first()
 
     @staticmethod
-    def update_issue(db: Session, issue_id: int, title: str, description: str, status: str):
+    def update_issue(
+        db: Session, issue_id: int, title: str, description: str, status: str
+    ):
         issue = db.query(Issue).filter(Issue.id == issue_id).first()
         if issue:
             issue.title = title

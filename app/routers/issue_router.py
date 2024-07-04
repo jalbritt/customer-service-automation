@@ -10,8 +10,11 @@ from prometheus_client import Counter, Histogram
 router = APIRouter()
 
 # Create metrics
-ISSUES_CREATED = Counter('issues_created_total', 'Total number of issues created')
-ISSUE_CREATION_TIME = Histogram('issue_creation_seconds', 'Time spent creating an issue')
+ISSUES_CREATED = Counter("issues_created_total", "Total number of issues created")
+ISSUE_CREATION_TIME = Histogram(
+    "issue_creation_seconds", "Time spent creating an issue"
+)
+
 
 @router.post("/issues/", response_model=Issue)
 def create_issue(issue: IssueCreate, db: Session = Depends(get_db)):
@@ -19,6 +22,7 @@ def create_issue(issue: IssueCreate, db: Session = Depends(get_db)):
         new_issue = IssueService.create_issue(db, issue.title, issue.description)
     ISSUES_CREATED.inc()
     return new_issue
+
 
 @router.post("/issues/", response_model=Issue)
 def create_issue(issue: IssueCreate, db: Session = Depends(get_db)):
@@ -40,7 +44,9 @@ def read_issue(issue_id: int, db: Session = Depends(get_db)):
 
 @router.put("/issues/{issue_id}", response_model=Issue)
 def update_issue(issue_id: int, issue: IssueCreate, db: Session = Depends(get_db)):
-    updated_issue = IssueService.update_issue(db, issue_id, issue.title, issue.description, issue.status)
+    updated_issue = IssueService.update_issue(
+        db, issue_id, issue.title, issue.description, issue.status
+    )
     if updated_issue is None:
         raise HTTPException(status_code=404, detail="Issue not found")
     return updated_issue
