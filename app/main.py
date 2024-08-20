@@ -1,7 +1,7 @@
 # main.py
 from fastapi import FastAPI
-from app.utils.database import engine, Base
-from app.routers import issue_router
+from utils.database import engine, Base
+from routers import issue_router
 from prometheus_client import make_asgi_app
 
 # Create tables

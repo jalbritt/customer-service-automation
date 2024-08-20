@@ -1,10 +1,9 @@
-# routers/issue_router.py
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
-from app.utils.database import get_db
-from app.services.issue_service import IssueService
-from app.schemas.issue import Issue, IssueCreate
+from utils.database import get_db
+from services.issue_service import IssueService
+from schemas.issue import Issue, IssueCreate
 from prometheus_client import Counter, Histogram
 
 router = APIRouter()
