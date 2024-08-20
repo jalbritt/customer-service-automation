@@ -1,6 +1,6 @@
 # services/issue_service.py
 from sqlalchemy.orm import Session
-from app.models.issue import Issue
+from models.issue import Issue
 
 
 class IssueService:

@@ -1,7 +1,7 @@
 # models/issue.py
 from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.sql import func
-from app.utils.database import Base
+from utils.database import Base
 
 
 class Issue(Base):
