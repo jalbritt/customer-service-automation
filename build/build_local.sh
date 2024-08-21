@@ -10,8 +10,8 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 kubectl apply -f infrastructure/application/app-argo.yaml
 kubectl apply -f infrastructure/monitoring/monitoring-argo.yaml
 kubectl apply -f infrastructure/database/database-argo.yaml
-kubectl apply -f infrastructure/message-queue/rabbitmq-argo.yaml
-kubectl apply -f infrastructure/message-queue/rabbitmq-argo.yaml
+# kubectl apply -f infrastructure/message-queue/rabbitmq-argo.yaml
+# kubectl apply -f infrastructure/message-queue/rabbitmq-argo.yaml
 kubectl apply -f infrastructure/argocd/argocd-app.yaml
 kubectl apply -f infrastructure/argocd/argocd-clusterrole.yaml
 kubectl apply -f infrastructure/argocd/argocd-clusterrolebinding.yaml
