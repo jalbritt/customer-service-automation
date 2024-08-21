@@ -4,7 +4,7 @@
 if [ ! $(minikube status | grep "host: Running" | wc -l) -eq 1 ]; then
   minikube start
 fi
-
+eval $(minikube docker-env)
 kubectl apply -f infrastructure/argocd/argocd-ns.yaml
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 kubectl apply -f infrastructure/application/app-argo.yaml
