@@ -22,6 +22,8 @@ echo "Waiting for ArgoCD to be ready..."
 kubectl wait --for=condition=available --timeout=1200s deployment/argocd-server -n argocd
 argocd admin initial-password -n argocd
 echo "ArgoCD is ready to use. Click on the link below to access the ArgoCD UI and log in using admin and initial password from above"
-minikube service -n argocd argocd-server --url
-k port-forward -n database svc/postgres 5432:5432 &&
-k port-forward -n application svc/customer-support 8000:8000
+minikube service -n argocd argocd-server --url &
+kubectl port-forward -n database svc/postgres 5432:5432 &
+kubectl port-forward -n application svc/customer-support 8000:8000 &
+
+wait
