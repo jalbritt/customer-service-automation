@@ -25,5 +25,6 @@ echo "ArgoCD is ready to use. Click on the link below to access the ArgoCD UI an
 minikube service -n argocd argocd-server --url &
 kubectl port-forward -n database svc/postgres 5432:5432 &
 kubectl port-forward -n application svc/customer-support 8000:8000 &
-
+kubectl port-forward -n monitoring svc/prometheus-service 9090:9090 &
+kubectl port-forward -n monitoring svc/grafana 3000:3000 &
 wait
