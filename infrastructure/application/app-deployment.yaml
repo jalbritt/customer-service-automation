@@ -21,4 +21,4 @@ spec:
         envFrom:
         - configMapRef:
             name: app-config
-        imagePullPolicy: Never
+        imagePullPolicy: IfNotPresent
