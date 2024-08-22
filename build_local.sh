@@ -5,6 +5,7 @@ if [ ! $(minikube status | grep "host: Running" | wc -l) -eq 1 ]; then
   minikube start
 fi
 eval $(minikube docker-env)
+docker build -t customer-support:latest .
 kubectl apply -f infrastructure/argocd/argocd-ns.yaml
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 kubectl apply -f infrastructure/application/app-argo.yaml
@@ -22,5 +23,5 @@ kubectl wait --for=condition=available --timeout=1200s deployment/argocd-server 
 argocd admin initial-password -n argocd
 echo "ArgoCD is ready to use. Click on the link below to access the ArgoCD UI and log in using admin and initial password from above"
 minikube service -n argocd argocd-server --url
-# TODO: report back endpoints for grafana, prometheus, and api
-exit
+k port-forward -n database svc/postgres 5432:5432 &&
+k port-forward -n application svc/customer-support 8000:8000
